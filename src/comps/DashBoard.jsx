@@ -7,7 +7,7 @@ import BasicBars from './Bar';
 import RadarChartDemo from './RadarChart';
 import AreaChartDemo from './AreaChart';
 
-// Reusable Styles
+
 const chartBoxStyle = (bgGradient) => ({
   position: 'relative',
   width: '48%',
@@ -66,7 +66,7 @@ const DashBoard = () => {
     <Box sx={{ display: 'flex', height: '100%', bgcolor: '#f3f4f6' }}>
       <Box sx={{ flexGrow: 1, p: 4, overflowY: 'auto', width: '100%' }}>
 
-        {/* Top Section */}
+
         <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between" mb={6}>
           <Box sx={chartBoxStyle('linear-gradient(to right, #a1c4fd, #c2e9fb)')}>
             <Typography sx={titleStyle}>Traffic Report</Typography>
@@ -83,7 +83,7 @@ const DashBoard = () => {
           </Box>
         </Stack>
 
-        {/* Middle Section */}
+
         <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between" mb={6}>
           <Box sx={chartBoxStyle('linear-gradient(to right, #fddb92, #d1fdff)')}>
             <Typography sx={titleStyle}>Zone Report</Typography>
@@ -100,7 +100,7 @@ const DashBoard = () => {
           </Box>
         </Stack>
 
-        {/* Bottom Section */}
+
         <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between">
           <Box sx={chartBoxStyle('linear-gradient(to right, #f6d365, #fda085)')}>
             <Typography sx={titleStyle}>Department Report</Typography>
@@ -118,7 +118,6 @@ const DashBoard = () => {
         </Stack>
       </Box>
 
-      {/* Pulse Animation Keyframe */}
       <style>
         {`
           @keyframes pulseGlow {
