@@ -34,7 +34,6 @@ const SideBar = () => {
         marginTop: 7,
       }}
     >
-      {/* Sidebar Heading Updated to "Maaz" */}
       <Typography
         variant="h4"
         fontWeight="bold"
