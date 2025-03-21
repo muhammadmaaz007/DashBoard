@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import BasicPie from './Pie';
 import GridDemo from './Line';
 import CompositionExample from './Gauge';
@@ -7,10 +7,10 @@ import BasicBars from './Bar';
 import RadarChartDemo from './RadarChart';
 import AreaChartDemo from './AreaChart';
 
-
 const chartBoxStyle = (bgGradient) => ({
   position: 'relative',
-  width: '48%',
+  width: '100%',
+  maxWidth: { xs: '100%', sm: '100%', md: '48%' }, // maxWidth ensures no overflow on small screens
   height: 400,
   borderRadius: 4,
   p: 2,
@@ -24,6 +24,7 @@ const chartBoxStyle = (bgGradient) => ({
   overflow: 'hidden',
   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
   transition: 'all 0.4s ease',
+  marginBottom: { xs: 3, md: 0 },
   '&:hover': {
     transform: 'scale(1.02)',
     boxShadow: '0 12px 36px rgba(0, 0, 0, 0.3)',
@@ -62,12 +63,21 @@ const titleStyle = {
 };
 
 const DashBoard = () => {
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+
   return (
     <Box sx={{ display: 'flex', height: '100%', bgcolor: '#f3f4f6' }}>
-      <Box sx={{ flexGrow: 1, p: 4, overflowY: 'auto', width: '100%' }}>
+      <Box sx={{ flexGrow: 1, p: { xs: 2, sm: 3, md: 4 }, overflowY: 'auto', width: '100%' }}>
 
-
-        <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between" mb={6}>
+        {/* Row 1 */}
+        <Stack
+          direction={isMdUp ? 'row' : 'column'}
+          spacing={4}
+          justifyContent="space-between"
+          alignItems="center"
+          mb={6}
+        >
           <Box sx={chartBoxStyle('linear-gradient(to right, #a1c4fd, #c2e9fb)')}>
             <Typography sx={titleStyle}>Traffic Report</Typography>
             <Box className="chart-content">
@@ -83,8 +93,14 @@ const DashBoard = () => {
           </Box>
         </Stack>
 
-
-        <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between" mb={6}>
+        {/* Row 2 */}
+        <Stack
+          direction={isMdUp ? 'row' : 'column'}
+          spacing={4}
+          justifyContent="space-between"
+          alignItems="center"
+          mb={6}
+        >
           <Box sx={chartBoxStyle('linear-gradient(to right, #fddb92, #d1fdff)')}>
             <Typography sx={titleStyle}>Zone Report</Typography>
             <Box className="chart-content">
@@ -100,8 +116,13 @@ const DashBoard = () => {
           </Box>
         </Stack>
 
-
-        <Stack direction="row" spacing={4} flexWrap="wrap" justifyContent="space-between">
+        {/* Row 3 */}
+        <Stack
+          direction={isMdUp ? 'row' : 'column'}
+          spacing={4}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Box sx={chartBoxStyle('linear-gradient(to right, #f6d365, #fda085)')}>
             <Typography sx={titleStyle}>Department Report</Typography>
             <Box className="chart-content">

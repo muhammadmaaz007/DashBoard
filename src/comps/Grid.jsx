@@ -14,7 +14,9 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Stack
+  Stack,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -49,25 +51,7 @@ const Item = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 450,
-  backdropFilter: 'blur(18px)',
-  background: 'rgba(255, 255, 255, 0.75)',
-  borderRadius: '24px',
-  border: '2px solid rgba(255, 255, 255, 0.3)',
-  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255,255,255,0.1)',
-  padding: '32px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 2,
-  transition: 'all 0.4s ease-in-out',
-};
-
-export default function BasicGrid() {
+export default function ProductManager() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
@@ -75,6 +59,29 @@ export default function BasicGrid() {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: isMobile ? '90%' : 450,
+    maxHeight: '90vh',
+    overflowY: 'auto',
+    backdropFilter: 'blur(18px)',
+    background: 'rgba(255, 255, 255, 0.75)',
+    borderRadius: '24px',
+    border: '2px solid rgba(255, 255, 255, 0.3)',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255,255,255,0.1)',
+    padding: '32px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    transition: 'all 0.4s ease-in-out',
+  };
 
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
@@ -131,16 +138,15 @@ export default function BasicGrid() {
   return (
     <Box sx={{ display: 'flex', height: '100vh', bgcolor: '#f9f9fc' }}>
       <Box sx={{ flexGrow: 1, p: 4, overflowY: 'auto' }}>
-        <Stack direction="row" alignItems="center" spacing={2} mb={4}>
+        <Stack direction="row" alignItems="center" spacing={2} mb={4} flexWrap="wrap">
           <AddShoppingCartIcon sx={{ fontSize: '2rem', color: '#7b1fa2' }} />
-          <Typography variant="h4" fontWeight="bold" color="#4a148c">
+          <Typography variant="h4" fontWeight="bold" color="#4a148c" flexGrow={1}>
             Product Manager
           </Typography>
           <Button
             variant="contained"
             onClick={handleOpenModal}
             sx={{
-              ml: 'auto',
               px: 4,
               py: 1.5,
               fontWeight: 600,

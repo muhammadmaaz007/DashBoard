@@ -21,7 +21,7 @@ const SideBar = () => {
     <Box
       sx={{
         width: 250,
-        height: '75vh',
+        height: '120vh',
         background: 'linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4)',
         color: 'white',
         padding: '20px',
@@ -29,9 +29,6 @@ const SideBar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        borderTopRightRadius: '24px',
-        borderBottomRightRadius: '24px',
-        marginTop: 7,
       }}
     >
       <Typography

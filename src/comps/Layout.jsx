@@ -13,7 +13,7 @@ const Layout = () => {
       <Heading />
       <Box sx={{ display: "flex", height: "calc(100vh - 128px)", overflow: "hidden" }}>
 
-        <SideBar />
+       
 
         <Box
           sx={{

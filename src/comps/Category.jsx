@@ -5,12 +5,12 @@ import {
   TextField,
   Button,
   Typography,
-  Paper,
   Stack,
   IconButton,
   Card,
   CardContent,
   CardActions,
+  Grid,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -42,7 +42,6 @@ const Category = () => {
     if (categoryName.trim() === '') return;
 
     let updatedCategories;
-
     if (editIndex !== null) {
       updatedCategories = [...categories];
       updatedCategories[editIndex] = categoryName;
@@ -73,20 +72,21 @@ const Category = () => {
   return (
     <Box
       sx={{
-        padding: 4,
+        padding: { xs: 2, md: 4 },
         minHeight: '100vh',
         bgcolor: 'linear-gradient(to right, #e0eafc, #cfdef3)',
         fontFamily: 'Poppins, sans-serif',
       }}
     >
       <Typography
-        variant="h3"
+        variant="h4"
         gutterBottom
         sx={{
           background: 'linear-gradient(to right, #6a11cb, #2575fc)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           fontWeight: 700,
+          mb: 3,
         }}
       >
         📂 Category Manager
@@ -112,41 +112,41 @@ const Category = () => {
         ➕ Add Category
       </Button>
 
-      <Stack direction="row" spacing={3} flexWrap="wrap">
-        {categories.length === 0 ? (
-          <Typography sx={{ color: '#888' }}>No categories added yet.</Typography>
-        ) : (
-          categories.map((item, index) => (
-            <Card
-              key={index}
-              sx={{
-                width: 280,
-                background: 'linear-gradient(to right, #83a4d4, #b6fbff)',
-                borderRadius: 4,
-                boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                },
-              }}
-            >
-              <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#1f3a93' }}>
-                  📁 {item}
-                </Typography>
-              </CardContent>
-              <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
-                <IconButton onClick={() => editCategory(index)} color="primary">
-                  <EditIcon />
-                </IconButton>
-                <IconButton onClick={() => deleteCategory(index)} color="error">
-                  <DeleteIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          ))
-        )}
-      </Stack>
+      {categories.length === 0 ? (
+        <Typography sx={{ color: '#888' }}>No categories added yet.</Typography>
+      ) : (
+        <Grid container spacing={3}>
+          {categories.map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <Card
+                sx={{
+                  background: 'linear-gradient(to right, #83a4d4, #b6fbff)',
+                  borderRadius: 4,
+                  boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+                  transition: 'transform 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                  },
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#1f3a93' }}>
+                    📁 {item}
+                  </Typography>
+                </CardContent>
+                <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
+                  <IconButton onClick={() => editCategory(index)} color="primary">
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton onClick={() => deleteCategory(index)} color="error">
+                    <DeleteIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
 
       <Modal open={open} onClose={handleClose}>
         <Box
@@ -155,11 +155,13 @@ const Category = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 420,
+            width: { xs: '90vw', sm: 420 },
+            maxHeight: '90vh',
+            overflowY: 'auto',
             bgcolor: 'background.paper',
             borderRadius: 4,
             boxShadow: 24,
-            p: 4,
+            p: { xs: 2, sm: 4 },
           }}
         >
           <Typography
