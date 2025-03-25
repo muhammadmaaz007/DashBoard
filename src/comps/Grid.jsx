@@ -51,7 +51,7 @@ const Item = styled(Paper)(({ theme }) => ({
   },
 }));
 
-export default function ProductManager() {
+export default function ProductManager({categories1}) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);

@@ -1,23 +1,28 @@
 import * as React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { colors } from '@mui/material';
 
 export default function BasicPie() {
-  return (
-    <PieChart
-    
-      series={[
-        {
-          data: [
-            { id: 0, value: 10, label: 'series A' },
-            { id: 1, value: 15, label: 'series B' },
-            { id: 2, value: 20, label: 'series C' },
-          ],
-        },
-      ]}
-      width={400}
-      height={200}
+  const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
+  const storedCategories = JSON.parse(localStorage.getItem('categories')) || [];
 
-    />
-  );
+  // const categories = [];
+  const counts = {};
+
+  storedCategories.map((category)=>{
+    counts[category]=0 })
+
+  storedProducts.map((product)=>{
+    counts[product.category]++
+  })
+
+  const chartData = storedCategories.map((index) => {
+    return{
+      id: index,
+      value: counts[index],
+      label: index
+    }
+  });
+
+
+  return <PieChart series={[{ data: chartData }]} width={400} height={200} />;
 }

@@ -57,7 +57,7 @@ const SideBar = () => {
             <ListItem
               button
               sx={{
-                marginBottom: 1.5,
+                marginBottom: 5,
                 borderRadius: '12px',
                 transition: '0.3s',
                 '&:hover': {
